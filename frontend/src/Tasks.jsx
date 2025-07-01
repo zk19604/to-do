@@ -48,24 +48,35 @@ function Tasks() {
   return (
     <div>
       <h2>ADD TASKS </h2>
+      <form
+  onSubmit={(e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    if (newtask.trim() !== "") {
+      handleAddTasks(newtask);
+    }
+  }}
+>
       <input
         value={newtask}
         onChange={(e) => setNewtask(e.target.value)}
         placeholder="Enter task name"
       />
+
       <button
-        onClick={() => handleAddTasks(newtask)}
+        onSubmit={() => handleAddTasks(newtask)}
         disabled={newtask.trim() === ""}
       >
         SUBMIT
       </button>
+      </form>
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
             {task.done ? <del>{task.name}</del> : task.name}
-             added on {formatDate(new Date(task.id))}
+             | {formatDate(new Date(task.id))}
             <button onClick={() => handleDone(task.id)}>Done</button>
             <button onClick={() => handleDelete(task.id)}>Delete</button>
+          
           </li>
         ))}
       </ul>

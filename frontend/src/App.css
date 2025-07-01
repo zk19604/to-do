@@ -1,191 +1,138 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.app-bg {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: #CFE6FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Pixel city skyline and stars as SVG background */
+  background-image:
+    url('data:image/svg+xml;utf8,<svg width="1440" height="800" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Stars/Snowflakes --><rect x="100" y="80" width="4" height="4" fill="white"/><rect x="300" y="120" width="2" height="2" fill="white"/><rect x="600" y="60" width="3" height="3" fill="white"/><rect x="900" y="100" width="2" height="2" fill="white"/><rect x="1200" y="50" width="3" height="3" fill="white"/><!-- City Skyline --><rect x="0" y="650" width="60" height="70" fill="%235b6ee1"/><rect x="60" y="670" width="40" height="50" fill="%237a8fff"/><rect x="100" y="690" width="30" height="30" fill="%235b6ee1"/><rect x="130" y="660" width="50" height="60" fill="%237a8fff"/><rect x="180" y="700" width="40" height="20" fill="%235b6ee1"/><rect x="220" y="670" width="60" height="50" fill="%237a8fff"/><rect x="280" y="650" width="40" height="70" fill="%235b6ee1"/><rect x="320" y="690" width="30" height="30" fill="%237a8fff"/><rect x="350" y="660" width="50" height="60" fill="%235b6ee1"/><rect x="400" y="700" width="40" height="20" fill="%237a8fff"/><rect x="440" y="670" width="60" height="50" fill="%235b6ee1"/><rect x="500" y="650" width="40" height="70" fill="%237a8fff"/><rect x="540" y="690" width="30" height="30" fill="%235b6ee1"/><rect x="570" y="660" width="50" height="60" fill="%237a8fff"/><rect x="620" y="700" width="40" height="20" fill="%235b6ee1"/><rect x="660" y="670" width="60" height="50" fill="%237a8fff"/><rect x="720" y="650" width="40" height="70" fill="%235b6ee1"/><rect x="760" y="690" width="30" height="30" fill="%237a8fff"/><rect x="790" y="660" width="50" height="60" fill="%235b6ee1"/><rect x="840" y="700" width="40" height="20" fill="%237a8fff"/><rect x="880" y="670" width="60" height="50" fill="%235b6ee1"/><rect x="940" y="650" width="40" height="70" fill="%237a8fff"/><rect x="980" y="690" width="30" height="30" fill="%235b6ee1"/><rect x="1010" y="660" width="50" height="60" fill="%237a8fff"/><rect x="1060" y="700" width="40" height="20" fill="%235b6ee1"/><rect x="1100" y="670" width="60" height="50" fill="%237a8fff"/><rect x="1160" y="650" width="40" height="70" fill="%235b6ee1"/><rect x="1200" y="690" width="30" height="30" fill="%237a8fff"/><rect x="1230" y="660" width="50" height="60" fill="%235b6ee1"/><rect x="1280" y="700" width="40" height="20" fill="%237a8fff"/><rect x="1320" y="670" width="60" height="50" fill="%235b6ee1"/></svg>');
+  background-position: bottom;
+  font-family: 'Press Start 2P', cursive;
+  color: #1E4BA5;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* Pomodoro Timer Styles */
-.pomodoro-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  color: white;
-}
-
-.pomodoro-container h1 {
-  margin: 0 0 2rem 0;
+.main-heading {
+  font-family: 'Press Start 2P', cursive;
   font-size: 2.5rem;
-  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  width: 100%;
+  padding-top: 2rem;
+  text-shadow: 2px 4px  #1E4BA5, -2px -2px 0 #1E4BA5;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 90vw;
+  height: 80vh;
+  min-width: 600px;
+  min-height: 400px;
+  border-radius: 1rem;
+  overflow: hidden;
+  
 }
 
-.mode-buttons {
+.tasks-section {
+  grid-row: 1 / span 2;
+  grid-column: 1 / 2;
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
+  align-items: top;
   justify-content: center;
-}
-
-.mode-btn {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.mode-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-}
-
-.mode-btn.active {
-  background: rgba(255, 255, 255, 0.9);
-  color: #667eea;
-}
-
-.timer-display {
-  margin: 2rem 0;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.time {
-  font-size: 4rem;
-  font-weight: 700;
-  font-family: 'Courier New', monospace;
-  margin: 1rem 0;
-  letter-spacing: 4px;
-}
+.pomodoro-section {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
 
-.controls {
   display: flex;
-  gap: 1rem;
+  align-items: top;
   justify-content: center;
-  margin: 2rem 0;
-  flex-wrap: wrap;
+  padding: 2rem;
 }
 
-.start-btn, .pause-btn, .reset-btn {
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
+.character-section {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  display: flex;
+  align-items: top;
+  justify-content: left;
+  padding: 2rem;
+}
+
+.pomodoro-header {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+
+
+.snowflake {
+  color: white;
+  font-size: 2.5rem;
+  position: absolute;
+  animation: fall linear infinite;
+  animation-duration: 10s;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.first-snowflake {
+  left: 10%;
+  top: 30%;
+}
+
+.second-snowflake{
+  left:90%
+}
+.third-snowflake{
+  left: 30%;
+  top: 70%;
+}
+
+
+
+button {
+  color: #fff;
+  background-color: #B181F4;
+  padding: 5px 7px 5px 7px;
+  margin: 10px;
+   font-size: 10px;
+font-family: "Press Start 2P", system-ui;
+  border: 0;
+  box-shadow: 0px 5px #1E4BA5, 0px -5px #1E4BA5, 5px 0px #1E4BA5, -5px 0px #1E4BA5, 0px 10px #00000038, 5px 5px #00000038, -5px 5px #00000038, inset 0px 5px #ffffff36 ;
   cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 120px;
+}
+button:active {
+  transform: translateY(5px);
+  box-shadow: 0px 5px #F4C1E0, 0px -5px #F4C1E0, 5px 0px #F4C1E0, -5px 0px #F4C1E0,inset 0px 5px #00000038;
 }
 
-.start-btn {
-  background: #4CAF50;
-  color: white;
+.settings-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+  margin: 0;
+  
+}
+.settings-icon {
+  width: 75px; 
+  height: 40px;
 }
 
-.pause-btn {
-  background: #FF9800;
-  color: white;
-}
-
-.reset-btn {
-  background: #f44336;
-  color: white;
-}
-
-.info {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.info p {
-  margin: 0.5rem 0;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .pomodoro-container {
-    padding: 1.5rem;
-    margin: 1rem;
-  }
-  
-  .pomodoro-container h1 {
-    font-size: 2rem;
-  }
-  
-  .mode-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .mode-btn {
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .time {
-    font-size: 3rem;
-    letter-spacing: 2px;
-  }
-  
-  .controls {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .start-btn, .pause-btn, .reset-btn {
-    width: 100%;
-    max-width: 200px;
-  }
+.settings-btn:active{
+  box-shadow: none;
 }

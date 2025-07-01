@@ -2,6 +2,8 @@
   "dependencies": {
     "@headlessui/react": "^2.2.4",
     "@react-oauth/google": "^0.12.2",
+    "nes.css": "^2.2.1",
+    "react-bootstrap": "^2.10.10",
     "react-router-dom": "^7.6.3"
   }
 }
