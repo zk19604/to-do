@@ -3,14 +3,13 @@ import Tasks from "./Tasks";
 import Pomodoro from "./Pomodoro";
 import Lofi from "./Lofi";
 import './App.css';
-
+import WalkingCharacter from './Pixelart';
 
 
 function App() {
   return (
     <div className="app-bg">
       <h1 className="main-heading">LOCK IN</h1>
-        <div className="snowflake first-snowflake">*</div>
         <div className="snowflake second-snowflake">*</div>
 <div className="snowflake third-snowflake">*</div>
       <div className="app-grid">
@@ -25,6 +24,9 @@ function App() {
            <Lofi />
           </div>
         </div>
+      </div>
+      <div>
+        <WalkingCharacter/>
       </div>
     </div>
   );

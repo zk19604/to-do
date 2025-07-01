@@ -73,7 +73,7 @@ function Tasks() {
         {tasks.map((task) => (
           <li key={task.id}>
             {task.done ? <del>{task.name}</del> : task.name}
-             | {formatDate(new Date(task.id))}
+             |{formatDate(new Date(task.id))}
             <button onClick={() => handleDone(task.id)}>Done</button>
             <button onClick={() => handleDelete(task.id)}>Delete</button>
           

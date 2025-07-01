@@ -1,18 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 .app-bg {
-  min-height: 100vh;
+  /* min-height: 100vh;
   min-width: 100vw;
   background: #CFE6FF;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Pixel city skyline and stars as SVG background */
   background-image:
     url('data:image/svg+xml;utf8,<svg width="1440" height="800" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Stars/Snowflakes --><rect x="100" y="80" width="4" height="4" fill="white"/><rect x="300" y="120" width="2" height="2" fill="white"/><rect x="600" y="60" width="3" height="3" fill="white"/><rect x="900" y="100" width="2" height="2" fill="white"/><rect x="1200" y="50" width="3" height="3" fill="white"/><!-- City Skyline --><rect x="0" y="650" width="60" height="70" fill="%235b6ee1"/><rect x="60" y="670" width="40" height="50" fill="%237a8fff"/><rect x="100" y="690" width="30" height="30" fill="%235b6ee1"/><rect x="130" y="660" width="50" height="60" fill="%237a8fff"/><rect x="180" y="700" width="40" height="20" fill="%235b6ee1"/><rect x="220" y="670" width="60" height="50" fill="%237a8fff"/><rect x="280" y="650" width="40" height="70" fill="%235b6ee1"/><rect x="320" y="690" width="30" height="30" fill="%237a8fff"/><rect x="350" y="660" width="50" height="60" fill="%235b6ee1"/><rect x="400" y="700" width="40" height="20" fill="%237a8fff"/><rect x="440" y="670" width="60" height="50" fill="%235b6ee1"/><rect x="500" y="650" width="40" height="70" fill="%237a8fff"/><rect x="540" y="690" width="30" height="30" fill="%235b6ee1"/><rect x="570" y="660" width="50" height="60" fill="%237a8fff"/><rect x="620" y="700" width="40" height="20" fill="%235b6ee1"/><rect x="660" y="670" width="60" height="50" fill="%237a8fff"/><rect x="720" y="650" width="40" height="70" fill="%235b6ee1"/><rect x="760" y="690" width="30" height="30" fill="%237a8fff"/><rect x="790" y="660" width="50" height="60" fill="%235b6ee1"/><rect x="840" y="700" width="40" height="20" fill="%237a8fff"/><rect x="880" y="670" width="60" height="50" fill="%235b6ee1"/><rect x="940" y="650" width="40" height="70" fill="%237a8fff"/><rect x="980" y="690" width="30" height="30" fill="%235b6ee1"/><rect x="1010" y="660" width="50" height="60" fill="%237a8fff"/><rect x="1060" y="700" width="40" height="20" fill="%235b6ee1"/><rect x="1100" y="670" width="60" height="50" fill="%237a8fff"/><rect x="1160" y="650" width="40" height="70" fill="%235b6ee1"/><rect x="1200" y="690" width="30" height="30" fill="%237a8fff"/><rect x="1230" y="660" width="50" height="60" fill="%235b6ee1"/><rect x="1280" y="700" width="40" height="20" fill="%237a8fff"/><rect x="1320" y="670" width="60" height="50" fill="%235b6ee1"/></svg>');
   background-position: bottom;
   font-family: 'Press Start 2P', cursive;
+  color: #1E4BA5; */
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', cursive;
   color: #1E4BA5;
+
+  /* Base background color */
+  background-color: #CFE6FF;
+
+  /* Combine background layers: PNG on top, SVG on bottom */
+  background-image:
+    url('/assets/background.png');  /* <-- your PNG */
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, contain;         /* PNG full cover, SVG fixed */
+  background-position: center bottom, bottom;
 }
 .main-heading {
   font-family: 'Press Start 2P', cursive;
@@ -47,6 +63,8 @@
   align-items: top;
   justify-content: center;
   padding: 2rem;
+  /* backdrop-filter: blur(6px);backdrop-filter: blur(6px); */
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .pomodoro-section {
@@ -57,15 +75,18 @@
   align-items: top;
   justify-content: center;
   padding: 2rem;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .character-section {
   grid-row: 2 / 3;
   grid-column: 2 / 3;
   display: flex;
-  align-items: top;
-  justify-content: left;
-  padding: 2rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5rem;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .pomodoro-header {
@@ -135,4 +156,112 @@ button:active {
 
 .settings-btn:active{
   box-shadow: none;
+}
+
+/* --- PIXEL MUSIC PLAYER --- */
+.pixel-music-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0;
+  padding: 1.5rem 2.5rem 1.5rem 2.5rem;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 320px;
+  max-width: 400px;
+  font-family: 'Press Start 2P', cursive;
+}
+.pixel-music-display {
+  width: 100%;
+  color: #1E4BA5;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pixel-music-controls {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.pixel-music-btn {
+  background: #B181F4;
+  border: 3px solid #1E4BA5;
+  box-shadow: 0 4px #7a8fff, 0 8px #5b6ee1;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+  transition: background 0.2s, box-shadow 0.2s;
+  border-radius: 0;
+  outline: none;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pixel-music-btn:active {
+  background: #7a8fff;
+  box-shadow: 0 2px #5b6ee1;
+}
+.pixel-music-btn:hover {
+  background: #7a8fff;
+  filter: brightness(1.1);
+}
+.pixel-music-progress {
+  width: 100%;
+  height: 18px;
+  background: #b3d1ff;
+  border: 3px solid #1E4BA5;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.pixel-music-progress-bar {
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #F4C1E0 0 10px, #B181F4 10px 20px);
+  transition: width 0.3s cubic-bezier(.77,0,.18,1);
+  border-right: 2px solid #1E4BA5;
+}
+.pixel-music-time {
+  font-size: 0.9rem;
+  color: #1E4BA5;
+  margin-top: 0.2rem;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 1px;
+}
+
+.walking-gif {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  animation: walkAcross 30s linear infinite;
+  
+}
+
+@keyframes walkAcross {
+  from { left: 100%; }
+  to { left: 0%; }
+}
+.walking2-gif {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  animation: walkAcross2 30s linear infinite;
+  
+}
+
+@keyframes walkAcross2 {
+  from { left: 0%; }
+  to { left: 100%; }
 }

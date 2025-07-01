@@ -63,7 +63,7 @@ export default function Pomodoro() {
   return (
     <div>
       <div className="pomodoro-header">
-        <h2>POMODORO</h2>
+        <h2 className="section-heading" style={{ width: '100%', textAlign: 'center', margin: 0 }}>POMODORO</h2>
         <button
           onClick={() => setShowSettings(!showSettings)}
           className="settings-btn"
@@ -108,7 +108,8 @@ export default function Pomodoro() {
       <button onClick={() => setMode(1)}>Work</button>
       <button onClick={() => setMode(2)}>Short Break</button>
       <button onClick={() => setMode(3)}>Long Break</button>
-
+      <br/>
+      <br/>
       {mode === 1 && <div>Work</div>}
       {mode === 2 && <div>Short Break</div>}
       {mode === 3 && <div>Long Break</div>}

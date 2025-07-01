@@ -1,12 +1,12 @@
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import React from 'react';
 
 export default function Progress({ progress }) {
   return (
-    <ProgressBar 
-      now={progress} 
-      style={{ height: '10px', borderRadius: '5px' }} 
-      variant="success" 
-      animated 
-    />
+    <div className="pixel-music-progress">
+      <div
+        className="pixel-music-progress-bar"
+        style={{ width: `${progress}%` }}
+      ></div>
+    </div>
   );
 }

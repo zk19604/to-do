@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Step 1</title>
+<style type="text/css">
+* {margin:0; padding:0; font-family:sans-serif}
+#stage {position:relative;}
+
+#link {position:absolute; z-index:2; width:50px; height:50px; text-align:center; line-height:3; color:#FFF; background:#333; outline:1px solid #FFF;}
+
+#link[data-key-s=true] {line-height:4;} /*makes Link face down if his "data-key-s" attribute is set to true*/
+#link[data-key-w=true] {line-height:1;} /*face up*/
+#link[data-key-a=true] {text-align:left;} /*face left*/
+#link[data-key-d=true] {text-align:right;} /*face right*/
+/*putting the left and right underneath means they'll override the top and bottom if you're moving in a diagonal direction*/
+
+/* don't worry if this next part looks confusing, all it does is make the background look nice. Safe to ignore */
+body {background:url( "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAOUlEQVQ4jWPQn/r/v/7U//8ZTT+ShBkY1kIwxQaQqnE4GoBgkIspNYCQEwlFM+0NIBiYw8CAAU8HACLnAQ/QMJgdAAAAAElFTkSuQmCC") repeat center 0;}
+#stage {height:calc(100vh - 64px); width:calc(100vw - 64px); margin:32px auto 0; min-width:640px; min-height:512px; background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATElEQVRYhe3OoREAIAwEwS8lZVAMZVFmSmAmCAYE+MScOPPmV9Y8rHn0MVM7vyoHvENWknYAAAAAAAAAAAAAAAAAAKAc8A1J3d9qwAJDQcg59Rgs0wAAAABJRU5ErkJggg==') repeat 15px 15px; box-sizing:border-box; border:1px solid transparent; border-image-source:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAACQCAYAAADnRuK4AAAC/0lEQVR4nO3ayXHcMBBA0QlFYSgYh+UgFJxDcJV8ou2CDREbSTTwDv8wnI3ofke+Xq+Pz9fr4/Pt/YdU3OHmBZBa+g0ovfD0jWnuUicAqaosoNwHpLf3vAuAVFQxoLMvaK/OHACkL2sGVPoDWrPSvQOkrr2fAqr9QcWuds8AqWvPxYBa/0Axat0rQOraazWg3j/UXPXuEaDNewzQqBvQM43aG0CbNg2g0Tekaxu9J4A2a1pAV92g5t4LQJsUBlB6w5qjy/YM0B6FB/Tt+0/dGEAC6G84Vx9Ez8wdoMVaFlB6/elBr1Y6V4DUNO/j9bKAcgfWGDhHAKlqzun15QGdDUBtcI4AUtF8c+9vA6h0IKqbE0DqmtN2gGoHtFu1cwFogqXNFECN31cbAIAmWNpMAdQJ6OnHI6I9jgEQQACNAHTXIGZp1LkBAgigkYDS608v+qp5jQIAEEAAXQFoNUi5cwAEEEAzA1o9gAACCCCAAAoaQAABBBBAAAUNIIAAAggggIIGEEAAAQQQQEEDCCCAAAIIoKABBBBAAAEEUNAAAggggAACKGgAAQQQQAABFDSAAAIIIIAAChpAAAEEEEAABQ0ggAACCCCAggYQQAABBBBAQQMIIIAAAgigoAEEEEAAAQRQ0AACCCCAAAIoaAABBBBAAC0L6OrB3FXuHAABBNCMgFaBcwYJIIAAmgnQqnCuOjdAAAE0AlD6O7uUnh8ggAB6EtDuAQQQQHcAuvrAUaudC0ATLG2mABo8oF0rnRNA6prTNoDA6Ztv7n2AVDTf3PvLAwJn7JzT6wCpas7p9WUBgXPtvI/XAKlp3sfr5QCBc093zx2gxVoOUHogxXgcBKDNWw6Qng0g7QHo6hvWXHsBaJOmBwROjEbvCaDNmg4QODEbtTeANu1xQOCsUe8eAdq82wGBs2atewVIXXstBgTOHtXuGSB17fkUEDh7Vrp3gNS19ywgcFTiACB9WTUgcPS/ci4AUlGngMBRSakTgFTVP4DAUUt/HtgHSA0dbn4BLg5lqw4e9n4AAAAASUVORK5CYII=); border-image-slice:48; border-image-width:48; border-image-repeat:repeat;}
+</style>
+</head>
+<body>
+
+<div id="stage">
+
+	<div id="link" style="left:200px; top:200px;">Link</div><!--add the Left and Top positions here to specify where Link should be when the page loads; javascript will move it after-->
+
+	<a href="#" style="position:fixed; bottom:100px; left:0; width:200px; text-align:right; background:#333; padding:10px; color:#FFF;">BACK</a>
+
+</div>
+
+<script>
+var Link = document.getElementById("link");
+var currentKeys = [];//get an array ready to record currently pressed keys
+var UP = 'w';
+var LEFT = 'a';
+var DOWN = 's';
+var RIGHT = 'd';
+
+function gameLoop(){//for each frame of animation...
+
+	var leftpos = parseInt(Link.style.left);
+	//prepare to change Link's inline CSS positioning
+
+	var toppos = parseInt(Link.style.top);
+	
+	if (currentKeys[LEFT]) Link.style.left = leftpos - 3 + 'px';
+	//if one of the key codes in the 'currentKeys' array is the key code for 'LEFT', set Link's left position to his current left position - 3 pixels (for every frame)
+
+	if (currentKeys[RIGHT]) Link.style.left = leftpos + 3 + 'px';
+	//3 pixels per frame seemed like a good speed
+
+	if(currentKeys[UP]) Link.style.top = toppos - 3 + 'px';
+
+	if(currentKeys[DOWN]) Link.style.top = toppos + 3 + 'px';
+	//the logic of your code is important: by not using "else if" with these ifs, you can have multiple keys working at the same time, which lets Link move both down and left, etc.
+	
+	window.requestAnimationFrame(gameLoop);
+	//and now run this game loop again, and keep running it at as fast a rate as javascript can conveniently fit it in
+
+}
+
+document.body.addEventListener(
+	"keydown", 
+	function(infoAboutTheKey){
+		currentKeys[infoAboutTheKey.key] = true;
+		//add the key's name to the array of currently pressed keys
+		Link.setAttribute('data-key-'+infoAboutTheKey.key, true);
+		//point him in the direction he's walking with Data Attributes & the CSS
+});
+
+document.body.addEventListener(
+	"keyup",
+	function(infoAboutTheKey){
+		currentKeys[infoAboutTheKey.key] = false; 
+		Link.setAttribute('data-key-'+infoAboutTheKey.key, ''); 
+		//blank out this key's data-key attribute, stop pointing him in the direction he's no longer walking in
+});
+
+window.addEventListener(
+	"load", 
+	function(){
+		gameLoop();
+});
+//start the game loop once the page is loaded
+
+</script></body></html>
