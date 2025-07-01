@@ -1,16 +1,13 @@
 
-import Tasks from './Tasks.jsx'
-
-const person = {
-  name : 'Zainab Khalil'
-}
+import Tasks from "./Tasks";
+import Pomodoro from "./Pomodoro";
 function App() {
+
   return (
    <div>
-   <h1>{person.name}</h1> 
     <Tasks />
+    <Pomodoro />
    </div>
-  )
+  );
 }
-
-export default App
+ export default App

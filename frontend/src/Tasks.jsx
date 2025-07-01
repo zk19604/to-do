@@ -3,75 +3,69 @@ import { useState, useEffect } from "react";
 const today = new Date();
 
 function formatDate(date) {
-  return new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  }).format(date);
 }
+
 
 function Tasks() {
   const [tasks, setTasks] = useState([]);
   const [newtask, setNewtask] = useState("");
-
-  const fetchTasks = async () => {
-    const res = await fetch("http://localhost:3000/task/1");
-    const data = await res.json();
-    setTasks(data);
-  };
   useEffect(() => {
-    fetchTasks();
+    const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    setTasks(savedTasks);
   }, []);
-  async function handleAddTasks(newtask) {
-    const res = await fetch("http://localhost:3000/task", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: newtask,
-        done: false,
-        userid: "1",
-      }),
-    });
-    if (res.ok) {
-      fetchTasks();
-      setNewtask("");
-    } else console.log("error");
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  function handleAddTasks(taskName) {
+    const newTaskObj = {
+      id: Date.now(), 
+      name: taskName,
+      done: false,
+    };
+    setTasks((prev) => prev.concat(newTaskObj));
+    setNewtask("");
   }
-  async function handleDone(id, done) {
-    await fetch(`http://localhost:3000/task/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ done: !done }),
-    });
-    fetchTasks();
+
+  function handleDone(id) {
+    const updated = tasks.map((t) =>
+      t.id === id ? { ...t, done: !t.done } : t
+    );
+    setTasks(updated);
   }
-  async function handleDelete(id) {
-    const res = await fetch(`http://localhost:3000/task/${id}`, {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      fetchTasks();
-    } else {
-      console.log("Failed to delete task");
-    }
+
+  function handleDelete(id) {
+    const updated = tasks.filter((t) => t.id !== id);
+    setTasks(updated);
   }
+
   return (
     <div>
-      ADD TASKS for {formatDate(today)}
-      <br />
+      <h2>ADD TASKS </h2>
       <input
         value={newtask}
         onChange={(e) => setNewtask(e.target.value)}
         placeholder="Enter task name"
       />
-      <button onClick={() => handleAddTasks(newtask)}
-        disabled = {newtask.trim()===""}> SUBMIT </button>
+      <button
+        onClick={() => handleAddTasks(newtask)}
+        disabled={newtask.trim() === ""}
+      >
+        SUBMIT
+      </button>
       <ul>
-        {tasks.map((tasks, i) => (
-          <li key={tasks._id}>
-            {tasks.done ? <del>{tasks.name}</del> : tasks.name}
-            <button onClick={() => handleDone(tasks._id, tasks.done)}>
-              Done
-            </button>
-            <button onClick={() => handleDelete(tasks._id)}>Delete</button>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            {task.done ? <del>{task.name}</del> : task.name}
+             added on {formatDate(new Date(task.id))}
+            <button onClick={() => handleDone(task.id)}>Done</button>
+            <button onClick={() => handleDelete(task.id)}>Delete</button>
           </li>
         ))}
       </ul>
